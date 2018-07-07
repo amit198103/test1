@@ -1,0 +1,19 @@
+        <div ng-show="modStudent2">
+        <table>
+            <tr><td>Name</td><td><input type="text" ng-model="stname"/></td></tr>
+            <tr><td>Course</td><td><input type="text" ng-model="stcourse"/></td></tr>
+            <tr><td>Start Date</td><td><input type="text" ng-model="stdate"/></td></tr>
+            <tr><td colspan="2"><input type="button" value="Modify" ng-click="modify2()"/></td></tr>
+        </table>
+        </div>
+        <div ng-show="modStudent">
+        <table border="1">
+            <tr><td>Name</td><td>Course</td><td>Start Date</td><td></td></tr>
+            <tr ng-repeat="item in students">
+                <td>{{item.name}}</td>
+                <td>{{item.course}}</td>
+                <td>{{item.date}}</td>
+                <td><input type="button" value="Modify" ng-click="modify($index)"/></td>
+            </tr>
+        </table>
+        </div>
