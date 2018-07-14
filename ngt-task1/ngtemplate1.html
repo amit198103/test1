@@ -1,0 +1,46 @@
+<html>
+   
+   <head>
+      <title>Angular JS Views</title>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+   </head>
+   
+   <body>
+      <h2>EDUFECT | AngularJS Application</h2>
+      <div ng-app = "mainApp">
+         <p><a href = "#StudentMessage">Student Message</a></p>
+         <p><a href = "#FacultyMessage">FacultyMessage</a></p>
+         <div ng-view></div>         
+      </div>
+      
+      <script>
+         var mainApp = angular.module("mainApp", ['ngRoute']);
+         mainApp.config(function($sceDelegateProvider) {
+            $sceDelegateProvider.resourceUrlWhitelist([
+               'https://raw.githubusercontent.com/amit198103/test1/master/**'
+            ]);
+         });
+         mainApp.config(['$routeProvider', function($routeProvider) {
+            $routeProvider.            
+            when('/StudentMessage', {
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/viewStudent.html',
+               controller: 'StudentMessageController'
+            }).
+            when('/FacultyMessage', {
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/viewFaculty.html',
+               controller: 'FacultyMessageController'
+            }).
+            otherwise({
+               redirectTo: '/StudentMessage'
+            });
+         }]);
+         mainApp.controller('StudentMessageController', function($scope) {
+            $scope.message = "All the Student, Welcome to Edufect.";
+         });
+         mainApp.controller('FacultyMessageController', function($scope) {
+            $scope.message = "To all the Faculty, We welcome you to Edufect.";
+         });
+      </script>
+   </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+       <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular-route.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <h2>EDUFECT | AngularJS Application</h2>
+    <div ng-app="apptext" ng-controller="textcontroller">
+        <table><tr>
+        <td><input type="button" value="List of Students" ng-click="#ListStudent"/></td>
+        <td><input type="button" value="New Student" ng-click="#NewStudent"/></td>
+        <td><input type="button" value="Course Complete" ng-click="#CourseComplete"/></td>
+        </tr></table>
+        <div ng-view></div>         
+      </div>
+      
+      <script>
+         var mainApp = angular.module("apptext", ['ngRoute']);
+         mainApp.config(function($sceDelegateProvider) {
+            $sceDelegateProvider.resourceUrlWhitelist([
+               'https://raw.githubusercontent.com/amit198103/test1/master/**'
+            ]);
+         });
+         mainApp.config(['$routeProvider', function($routeProvider) {
+            $routeProvider.            
+            when('/ListStudent', {
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/task2/listStudent.html',
+            }).
+            when('/NewStudent', {
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/task2/newStudent.html',
+            }).
+            when('/CourseComplete', {
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/task2/courseComplete.html',
+           }).
+            otherwise({
+               redirectTo: '/ListStudent'
+            });
+         }]);
+        mainApp.controller("textcontroller",function($scope) {
+            $scope.students=[];
+            $scope.enrol = function() {
+                obj1 = {name:$scope.stname, course:$scope.stcourse, date:$scope.stdate};
+                $scope.students.push(obj1);
+                $scope.stname="";
+                $scope.stcourse="";
+                $scope.stdate="";
+            }
+            $scope.completed = function(param) {
+                $scope.students.splice(param,1);
+            }
+       }
+    )
+</script>
+</body>
+</html>
