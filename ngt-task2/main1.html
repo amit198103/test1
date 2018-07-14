@@ -8,11 +8,11 @@
 </head>
 <body>
     <h2>EDUFECT | AngularJS Application</h2>
-    <div ng-app="apptext" ng-controller="textcontroller">
+    <div ng-app="apptext", controller="textcontroller">
         <table><tr>
-        <td><input type="button" value="List of Students" ng-click="#ListStudent"/></td>
-        <td><input type="button" value="New Student" ng-click="#NewStudent"/></td>
-        <td><input type="button" value="Course Complete" ng-click="#CourseComplete"/></td>
+        <td><a href = "#!ListStudent">List of Students</a></td>
+        <td><a href = "#!NewStudent">New Student</a></td>
+        <td><a href = "#!CourseComplete">Course Complete</a></td>
         </tr></table>
         <div ng-view></div>         
       </div>
@@ -27,30 +27,40 @@
          mainApp.config(['$routeProvider', function($routeProvider) {
             $routeProvider.            
             when('/ListStudent', {
-               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/task2/listStudent.html',
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/ngt-task2/listStudent.html',
+               controller : 'textcontroller'
             }).
             when('/NewStudent', {
-               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/task2/newStudent.html',
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/ngt-task2/newStudent.html',
+               controller : 'textcontroller'
             }).
             when('/CourseComplete', {
-               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/task2/courseComplete.html',
-           }).
-            otherwise({
-               redirectTo: '/ListStudent'
-            });
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/ngt-task2/courseComplete.html',
+               controller : 'textcontroller'
+           })
          }]);
-        mainApp.controller("textcontroller",function($scope) {
-            $scope.students=[];
+        mainApp.controller("textcontroller",function($scope,$rootScope) {
             $scope.enrol = function() {
                 obj1 = {name:$scope.stname, course:$scope.stcourse, date:$scope.stdate};
-                $scope.students.push(obj1);
+                if (typeof $rootScope.students == 'undefined') {
+                    $rootScope.students = [];
+                }
+                $rootScope.students.push(obj1);
                 $scope.stname="";
                 $scope.stcourse="";
                 $scope.stdate="";
             }
             $scope.completed = function(param) {
-                $scope.students.splice(param,1);
+                $rootScope.students.splice(param,1);
             }
+            $scope.modify = function(param) {
+                $rootScope.student = $rootScope.students[param];
+                $rootScope.modIndex=param;
+            }
+            $scope.modify2 = function() {
+                $rootScope.students[$rootScope.modIndex]=$rootScope.student;
+            }
+
        }
     )
 </script>
