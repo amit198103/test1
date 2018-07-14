@@ -28,6 +28,7 @@
             $routeProvider.            
             when('/ListStudent', {
                templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/ngt-task2/listStudent.html',
+<<<<<<< HEAD
                controller : 'textcontroller'
             }).
             when('/NewStudent', {
@@ -38,6 +39,18 @@
                templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/ngt-task2/courseComplete.html',
                controller : 'textcontroller'
            })
+=======
+            }).
+            when('/NewStudent', {
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/ngt-task2/newStudent.html',
+            }).
+            when('/CourseComplete', {
+               templateUrl: 'https://raw.githubusercontent.com/amit198103/test1/master/ngt-task2/courseComplete.html',
+           }).
+            otherwise({
+               redirectTo: '/ListStudent'
+            });
+>>>>>>> 2d7efda3d0ed0862c962a34f263986a5eaf768d8
          }]);
         mainApp.controller("textcontroller",function($scope,$rootScope) {
             $scope.enrol = function() {
